@@ -38,4 +38,8 @@ describe 'The calculate food order site ' do
 
     expect(last_response).to be_ok
   end
+
+  it "should have ingredience for a recipe" do
+
+  end
 end
