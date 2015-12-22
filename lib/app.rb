@@ -8,7 +8,7 @@ end
 get '/recipes.json' do
   recipes = []
   Recipe.all.each do |recipe|
-    recipes << { :name => recipe.name }
+    recipes << { :name => recipe.name, :ingrediences => recipe.ingrediences }
   end
 
   content_type :json
@@ -20,3 +20,16 @@ get '/order.json' do
 
 end
 
+get '/goods.json' do
+  goods = []
+  Good.all.each do |good|
+    goods << { :name => good.name,
+      :unit => good.unit,
+      :unit_size => good.unit_size,
+      :price_per_unit => good.price_per_unit
+      }
+  end
+
+  content_type :json
+  goods.to_json
+end

@@ -6,6 +6,7 @@ require 'dm-migrations'
 
 require 'recipe'
 require 'ingredience'
+require 'good'
 
 RSpec.configure do |config|
   config.include Rack::Test::Methods
@@ -16,6 +17,7 @@ RSpec.configure do |config|
   DataMapper.finalize
   Recipe.auto_migrate!
   Ingredience.auto_migrate!
+  Good.auto_migrate!
 end
 
 
