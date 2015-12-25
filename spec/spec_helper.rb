@@ -13,6 +13,7 @@ RSpec.configure do |config|
   config.run_all_when_everything_filtered = true
   config.filter_run :focus
   config.order = 'random'
+  config.include RSpecHtmlMatchers
   DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/ocalfo_test.db")
   DataMapper.finalize
   Recipe.auto_migrate!

@@ -31,7 +31,7 @@ describe 'The calculate food order site ' do
   it "shows the home page" do
     get '/'
     expect(last_response).to be_ok
-    expect(last_response.body).to eq('Hello World!')
+    expect(last_response.body).to have_tag('h1', :text  => 'API documentation')
   end
 
   it "should return all recipes" do
