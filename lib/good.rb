@@ -1,3 +1,6 @@
+require 'bundler'
+Bundler.require
+
 class Good
   include DataMapper::Resource
 

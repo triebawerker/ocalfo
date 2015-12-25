@@ -25,7 +25,7 @@ describe 'The calculate food order site ' do
   end
 
   def app
-    Sinatra::Application
+    App
   end
 
   it "shows the home page" do
