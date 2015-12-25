@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>goods</title>
+  </head>
+  <body>
+    <h1>List of goods</goods>
+    <table>
+      <head>
+        <tr>
+          <th>name</th>
+          <th>unit</th>
+          <th>unit size</th>
+          <th>price per unit in cent</th>
+        </tr>
+      </head>
+      <%@goods.each do |good| %>
+      <body>
+        <tr>
+          <td><%=good.name%></td>
+          <td><%=good.unit%></td>
+          <td><%=good.unit_size%></td>
+          <td><%=good.price_per_unit%></td>
+        </tr>
+      </body>
+      <%end%>
+    </table>
+  </body>
+</html>
