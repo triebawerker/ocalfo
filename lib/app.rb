@@ -10,7 +10,7 @@ class App < Sinatra::Base
   set :title, "ocalfo"
 
   get '/' do
-    'Hello World!'
+    erb :index
   end
 
   get '/recipes.json' do
