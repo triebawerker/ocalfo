@@ -4,5 +4,5 @@ class Recipe
   property :id,   Serial, :key => true
   property :name, String
 
-  has n, :ingrediences
+  has n, :ingredients
 end

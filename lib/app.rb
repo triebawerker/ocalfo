@@ -16,7 +16,7 @@ class App < Sinatra::Base
   get '/recipes.json' do
     recipes = []
     Recipe.all.each do |recipe|
-      recipes << { :name => recipe.name, :ingrediences => recipe.ingrediences }
+      recipes << { :name => recipe.name, :ingredients => recipe.ingredients }
     end
 
     content_type :json

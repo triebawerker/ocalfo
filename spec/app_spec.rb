@@ -8,7 +8,7 @@ describe 'The calculate food order site ' do
 
   before(:each) do
     Recipe.all.destroy
-    Ingredience.all.destroy
+    Ingredient.all.destroy
     Good.all.destroy
 
     Recipe.create(:name => 'pancake')
