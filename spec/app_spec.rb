@@ -3,6 +3,7 @@ require File.dirname(__FILE__) + '/spec_helper'
 ENV['RACK_ENV'] = 'test'
 
 require_relative '../lib/app'  # <-- your sinatra app
+require 'tilt/erb'
 
 describe 'The calculate food order site ' do
 
