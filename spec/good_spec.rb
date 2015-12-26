@@ -12,7 +12,6 @@ describe "Good api" do
     good.unit_size = 1
     good.price_per_unit = 1000
 
-
     expect(good.save).to be_truthy
   end
 end

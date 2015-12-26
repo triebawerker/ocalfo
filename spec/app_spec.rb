@@ -47,19 +47,18 @@ describe 'The calculate food order site ' do
     expect(recipes[1]['name']).to eq("omelette")
   end
 
-  it "should calculate an order for a recipe" do
-    get '/order.json'
+  xit "should calculate an order for a recipe" do
+    post '/order.json'
 
     expect(last_response).to be_ok
   end
 
-  it "should have ingredience for a recipe" do
-    ingredience = Ingredience.new
-    ingredience.name = "egg"
-    ingredience.quantity = 3
-    ingredience.save
+  it "should have ingredient for a recipe" do
+    ingredient = Ingredient.new
+    ingredient.quantity = 3
+    ingredient.save
 
-    @pancake.ingrediences << ingredience
+    @pancake.ingredients << ingredient
     @pancake.save
 
     get '/recipes.json'
@@ -70,7 +69,7 @@ describe 'The calculate food order site ' do
     expect(recipes.size).to be 2
     expect(recipes[0]['name']).to eq("pancake")
     expect(recipes[1]['name']).to eq("omelette")
-    expect(ingredience.recipe).to be_a(Recipe)
+    expect(ingredient.recipe).to be_a(Recipe)
   end
 
   it "should get the goods" do
