@@ -9,4 +9,7 @@ class Good
   property :unit, String
   property :unit_size, Integer
   property :price_per_unit, Integer
+
+  has n, :ingredients
+
 end
