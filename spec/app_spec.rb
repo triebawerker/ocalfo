@@ -15,13 +15,32 @@ describe 'The calculate food order site ' do
     Recipe.create(:name => 'pancake')
     Recipe.create(:name => 'omelette')
 
-    @pancake = Recipe.first(:name => 'pancake')
-
     Good.create(
     :name => "flour",
-    :unit => "kg",
-    :unit_size => 1,
-    :price_per_unit => 1000)
+    :unit => "g",
+    :unit_size => 1000,
+    :price_per_unit => 199)
+
+    Good.create(
+      :name => "sugar",
+      :unit => "g",
+      :unit_size => 1000,
+      :price_per_unit => 99)
+
+    @flour = Good.first(:name => "flour")
+    @sugar = Good.first(:name => "sugar")
+
+    @pancake = Recipe.first(:name => "pancake")
+
+    Ingredient.create(
+      :good => @flour,
+      :quantity => 100,
+      :recipe => @pancake)
+
+    Ingredient.create(
+      :good => @sugar,
+      :quantity => 50,
+      :recipe => @pancake)
 
   end
 
@@ -47,10 +66,19 @@ describe 'The calculate food order site ' do
     expect(recipes[1]['name']).to eq("omelette")
   end
 
-  xit "should calculate an order for a recipe" do
-    post '/order.json'
+  it "should calculate an order for a recipe" do
+
+    post '/order.json', {"recipe_id": 1, "quantity": 23}
+
+    order = JSON::parse(last_response.body)
+
+#     DataMapper.logger.debug(order[0].inspect)
 
     expect(last_response).to be_ok
+    expect(order[0]['name']).to eq "flour"
+    expect(order[0]['quantity']).to eq 3
+    expect(order[1]['name']).to eq "sugar"
+    expect(order[1]['quantity']).to be 2
   end
 
   it "should have ingredient for a recipe" do
@@ -76,10 +104,6 @@ describe 'The calculate food order site ' do
     get 'goods.json'
 
     goods = JSON::parse(last_response.body)
-
-    DataMapper::Logger.new($stdout, :debug)
-    DataMapper.logger.debug(goods[0]["name"])
-
 
     expect(goods[0]["name"]).to eq("flour")
   end
