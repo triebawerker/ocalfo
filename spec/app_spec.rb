@@ -12,25 +12,20 @@ describe 'The calculate food order site ' do
     Ingredient.all.destroy
     Good.all.destroy
 
-    Recipe.create(:name => 'pancake')
-    Recipe.create(:name => 'omelette')
+    @pancake = Recipe.create(:name => 'pancake')
+    @omelette = Recipe.create(:name => 'omelette')
 
-    Good.create(
+    @flour = Good.create(
     :name => "flour",
     :unit => "g",
     :unit_size => 1000,
     :price_per_unit => 199)
 
-    Good.create(
+    @sugar = Good.create(
       :name => "sugar",
       :unit => "g",
       :unit_size => 1000,
       :price_per_unit => 99)
-
-    @flour = Good.first(:name => "flour")
-    @sugar = Good.first(:name => "sugar")
-
-    @pancake = Recipe.first(:name => "pancake")
 
     Ingredient.create(
       :good => @flour,
