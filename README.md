@@ -1,15 +1,18 @@
-Run seeds
-
-h1 Get code
+# Get code
 ```
 git clone git@github.com:triebawerker/ocalfo.git
 ```
 
-h1 Get gems
+# Get gems
 ```
 bundler
 ```
 
+# Run seeds
+in root directory
+```
+ruby app/seeds.rb
+```
 
 This will install a set of recipes (pancake and omelette) with ingredients and goods.
 
