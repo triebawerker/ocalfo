@@ -6,8 +6,6 @@ require_relative 'ingredient'
 
 class App < Sinatra::Base
 
-
-
   DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/ocalfo_test.db")
   DataMapper::Logger.new($stdout, :debug)
 
@@ -27,7 +25,26 @@ class App < Sinatra::Base
   get '/recipes.json' do
     recipes = []
     Recipe.all.each do |recipe|
-      recipes << { :name => recipe.name, :ingredients => recipe.ingredients }
+
+      ingredients = []
+
+      recipe.ingredients.each do |ingredient|
+
+        ingredients << {
+          :recipe => ingredient.recipe.name,
+          :recipe_id => ingredient.recipe.id,
+          :good => ingredient.good.name,
+          :good_id => ingredient.good.id,
+          :quantity => ingredient.quantity,
+          :unit => ingredient.good.unit,
+          :unit_size => ingredient.good.unit_size
+          }
+      end
+      recipes << {
+        :name => recipe.name,
+        :ind => recipe.id,
+        :ingredients => ingredients,
+        }
     end
 
     content_type :json
@@ -52,7 +69,12 @@ class App < Sinatra::Base
 
         #calculate quantity of units
         quantity = ((ingredient.quantity * order_quantity.to_i).to_f / good.unit_size.to_f).ceil
-        order << {:name => good.name, :quantity => quantity}
+        order << {
+          :name => good.name,
+          :quantity => quantity,
+          :unit => ingredient.good.unit,
+          :unit_size => ingredient.good.unit_size
+          }
 
       end
     end
