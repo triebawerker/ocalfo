@@ -81,4 +81,24 @@ class App < Sinatra::Base
     content_type :json
     goods.to_json
   end
+
+  get '/ingredients.json' do
+
+    ingredients = []
+    Ingredient.all.each do |ingredient|
+      DataMapper.logger.debug("ingredient in ingredient: #{ingredient.recipe.name}")
+      ingredients << {
+        :recipe => ingredient.recipe.name,
+        :recipe_id => ingredient.recipe.id,
+        :good => ingredient.good.name,
+        :good_id => ingredient.good.id,
+        :quantity => ingredient.quantity,
+        :unit => ingredient.good.unit
+        }
+    end
+
+    content_type :json
+    ingredients.to_json
+  end
+
 end

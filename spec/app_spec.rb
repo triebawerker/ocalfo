@@ -108,4 +108,10 @@ describe 'The calculate food order site ' do
     expect(goods[0]["name"]).to eq("flour")
   end
 
+  it "should return ingredients as json" do
+    get 'ingredients.json'
+
+    expect(last_response).to be_ok
+  end
+
 end
