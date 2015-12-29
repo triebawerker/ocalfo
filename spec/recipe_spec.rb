@@ -1,6 +1,8 @@
 describe "Test api" do
   before(:each) do
     Recipe.all.destroy
+    Good.all.destroy
+    Ingredient.all.destroy
   end
 
   it "should add recipe" do

@@ -3,6 +3,8 @@ require 'good'
 describe "Good api" do
   before(:each) do
     Good.all.destroy
+    Recipe.all.destroy
+    Ingredient.all.destroy
   end
 
   it "should add a good" do

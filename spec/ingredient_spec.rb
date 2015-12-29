@@ -3,6 +3,8 @@ require 'ingredient'
 describe "Ingredient" do
   before(:each) do
     Ingredient.all.destroy
+    Good.all.destroy
+    Ingredient.all.destroy
   end
 
   it "should compose a recipe and have a good" do
