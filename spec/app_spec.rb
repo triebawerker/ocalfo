@@ -4,6 +4,7 @@ ENV['RACK_ENV'] = 'test'
 
 require_relative '../lib/app'  # <-- your sinatra app
 require 'tilt/erb'
+require 'json'
 
 describe 'The calculate food order site ' do
 
@@ -63,11 +64,17 @@ describe 'The calculate food order site ' do
 
   it "should calculate an order for a recipe" do
 
-    post '/order.json', {"recipe_id": 1, "quantity": 23}
+    recipes = Recipe.all
 
-    order = JSON::parse(last_response.body)
+    recipes_for_order = { :recipes => []}
 
-#     DataMapper.logger.debug(order[0].inspect)
+    recipes.each do |recipe|
+      recipes_for_order[:recipes] << {:recipe_id => recipe.id, :quantity => 23}
+    end
+
+    post '/order.json', recipes_for_order.to_json
+
+    order = JSON.parse last_response.body
 
     expect(last_response).to be_ok
     expect(order[0]['name']).to eq "flour"

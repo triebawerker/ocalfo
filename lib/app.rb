@@ -37,28 +37,22 @@ class App < Sinatra::Base
 
     order = []
 
-    order_quantity = params['quantity']
+    items = JSON.parse request.body.read
 
-    DataMapper.logger.debug("params: #{params.inspect}")
+    items['recipes'].each do |item|
 
-    recipe = Recipe.first(:name => "pancake")
+      recipe = Recipe.get(item['recipe_id'].to_i)
+      order_quantity = item['quantity']
 
-#     order = {:order_id => 1, :name => "flour", :quantity => 100}
+      recipe.ingredients.each do |ingredient|
 
-    recipe.ingredients.each do |ingredient|
-      good = Good.get(ingredient.good.id)
+        good = Good.get(ingredient.good.id)
 
-      #calculate quntity of units
+        #calculate quantity of units
+        quantity = ((ingredient.quantity * order_quantity.to_i).to_f / good.unit_size.to_f).ceil
+        order << {:name => good.name, :quantity => quantity}
 
-      DataMapper.logger.debug(
-        "INGREDIENT: #{ingredient.quantity}, unit_size: #{good.unit_size}"
-        )
-
-      quantity = ((ingredient.quantity * order_quantity.to_i).to_f / good.unit_size.to_f).ceil
-      order << {:name => good.name, :quantity => quantity}
-
-
-
+      end
     end
 
     order.to_json
