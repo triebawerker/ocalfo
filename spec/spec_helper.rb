@@ -15,13 +15,24 @@ RSpec.configure do |config|
   config.order = 'random'
   config.include RSpecHtmlMatchers
 
+end
+
+configure :development, :test, :production do
 #   DataMapper::Logger.new($stdout, :debug)
-  DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/ocalfo_test.db")
 
   DataMapper.finalize
   Recipe.auto_migrate!
   Ingredient.auto_migrate!
   Good.auto_migrate!
+end
+
+configure :development do
+  DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/ocalfo_test.db")
+
+end
+
+configure :production do
+    DataMapper.setup(:default, ENV['HEROKU_POSTGRESQL_RED_URL'])
 end
 
 
