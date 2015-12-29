@@ -77,12 +77,6 @@ describe 'The calculate food order site ' do
   end
 
   it "should have ingredient for a recipe" do
-    ingredient = Ingredient.new
-    ingredient.quantity = 3
-    ingredient.save
-
-    @pancake.ingredients << ingredient
-    @pancake.save
 
     get '/recipes.json'
 
@@ -92,7 +86,11 @@ describe 'The calculate food order site ' do
     expect(recipes.size).to be 2
     expect(recipes[0]['name']).to eq("pancake")
     expect(recipes[1]['name']).to eq("omelette")
-    expect(ingredient.recipe).to be_a(Recipe)
+
+    recipe = Recipe.first(:name => recipes[0]['name'])
+    ingredient = Ingredient.first(recipe)
+
+    expect(ingredient['recipe_id'].to_i).to be recipe['id'].to_i
   end
 
   it "should get the goods" do
