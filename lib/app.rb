@@ -1,6 +1,8 @@
 require 'sinatra/base'
 require 'json'
 require_relative 'good'
+require_relative 'recipe'
+require_relative 'ingredient'
 
 class App < Sinatra::Base
 
