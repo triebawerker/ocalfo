@@ -66,6 +66,3 @@ DEPENDENCIES
   rspec
   rspec-html-matchers
   sinatra
-
-BUNDLED WITH
-   1.11.2
