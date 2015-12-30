@@ -24,6 +24,10 @@ class App < Sinatra::Base
 
   configure :production do
     DataMapper.setup(:default, ENV['HEROKU_POSTGRESQL_RED_URL'])
+    DataMapper.finalize
+    Recipe.auto_migrate!
+    Ingredient.auto_migrate!
+    Good.auto_migrate!
   end
 
   get '/' do
