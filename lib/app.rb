@@ -6,8 +6,6 @@ require_relative 'ingredient'
 
 class App < Sinatra::Base
 
-  DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/ocalfo_test.db")
-  DataMapper::Logger.new($stdout, :debug)
 
   configure do
     set :views, File.dirname(__FILE__) + '/../views'
@@ -16,6 +14,16 @@ class App < Sinatra::Base
     set :dump_errors, false
     set :raise_errors, true
     set :show_exceptions, false
+
+  end
+
+  configure :development do
+    DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/ocalfo_test.db")
+    DataMapper::Logger.new($stdout, :debug)
+  end
+
+  configure :production do
+    DataMapper.setup(:default, ENV['HEROKU_POSTGRESQL_RED_URL'])
   end
 
   get '/' do
