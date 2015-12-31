@@ -8,12 +8,12 @@ class App < Sinatra::Base
 
 
   configure :development do
-    DataMapper::Logger.new($stdout, :debug)
     DataMapper.setup(:default, 'postgres://localhost/ocalfo')
+    DataMapper::Logger.new($stdout, :debug)
   end
 
   configure :production do
-    DataMapper.setup(:default, ENV['HEROKU_POSTGRESQL_RED_URL'])
+    DataMapper.setup(:default, ENV['DATABASE_URL'])
   end
 
     configure do
