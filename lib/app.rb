@@ -7,7 +7,16 @@ require_relative 'ingredient'
 class App < Sinatra::Base
 
 
-  configure do
+  configure :development do
+    DataMapper::Logger.new($stdout, :debug)
+    DataMapper.setup(:default, 'postgres://localhost/ocalfo')
+  end
+
+  configure :production do
+    DataMapper.setup(:default, ENV['HEROKU_POSTGRESQL_RED_URL'])
+  end
+
+    configure do
     set :views, File.dirname(__FILE__) + '/../views'
     set :title, "ocalfo"
 
@@ -15,19 +24,11 @@ class App < Sinatra::Base
     set :raise_errors, true
     set :show_exceptions, false
 
-  end
-
-  configure :development do
-    DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/ocalfo_test.db")
-    DataMapper::Logger.new($stdout, :debug)
-  end
-
-  configure :production do
-    DataMapper.setup(:default, ENV['HEROKU_POSTGRESQL_RED_URL'])
     DataMapper.finalize
     Recipe.auto_migrate!
     Ingredient.auto_migrate!
     Good.auto_migrate!
+
   end
 
   get '/' do
