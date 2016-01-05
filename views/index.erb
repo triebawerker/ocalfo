@@ -1,9 +1,8 @@
 <h1>API documentation</h1>
 <h2>GET goods</h2>
-
+<h3>Request</h3>
 GET<br>
-http://<host>/goods.json<br>
-Example response:<br>
-<p>
-[{"name":"flour","unit":"kg","unit_size":1,"price_per_unit":1000}]
-</p>
+http://<%= request.host %>/goods.json<br>
+
+<h3>Example response</h3>
+<p class="response">[{"name":"flour","unit":"kg","unit_size":1,"price_per_unit":1000}]</p>
