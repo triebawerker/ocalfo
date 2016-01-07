@@ -1,6 +1,3 @@
-require 'bundler'
-Bundler.require
-
 class Recipe
   include DataMapper::Resource
 

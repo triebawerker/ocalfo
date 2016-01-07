@@ -1,3 +1,5 @@
+require 'bundler'
+Bundler.require
 require 'sinatra/base'
 require 'dm-serializer'
 require_relative 'good'

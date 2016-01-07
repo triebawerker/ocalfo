@@ -1,5 +1,3 @@
-require 'bundler'
-Bundler.require
 
 class Ingredient
   include DataMapper::Resource
