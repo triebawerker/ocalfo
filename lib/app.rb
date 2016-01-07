@@ -6,6 +6,7 @@ require 'dm-serializer'
 require_relative 'good'
 require_relative 'recipe'
 require_relative 'ingredient'
+require 'json'
 
 class App < Sinatra::Base
 
