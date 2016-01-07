@@ -1,5 +1,6 @@
 require 'bundler'
 Bundler.require
+
 require 'sinatra/base'
 require 'dm-serializer'
 require_relative 'good'
@@ -70,10 +71,9 @@ class App < Sinatra::Base
     content_type :json
 
     order = []
+    recipes = JSON.parse(request.body.read)
 
-    items = JSON.parse request.body.read
-
-    items['recipes'].each do |item|
+    recipes['recipes'].each do |item|
 
       recipe = Recipe.get(item['recipe_id'].to_i)
       order_quantity = item['quantity']
@@ -123,7 +123,6 @@ class App < Sinatra::Base
 
     ingredients = []
     Ingredient.all.each do |ingredient|
-      DataMapper.logger.debug("ingredient in ingredient: #{ingredient.recipe.name}")
       ingredients << {
         :recipe => ingredient.recipe.name,
         :recipe_id => ingredient.recipe.id,
