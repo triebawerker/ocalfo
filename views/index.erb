@@ -6,3 +6,34 @@ http://<%= request.host %>/goods.json<br>
 
 <h3>Example response</h3>
 <p class="response">[{"name":"flour","unit":"kg","unit_size":1,"price_per_unit":1000}]</p>
+
+<h2>POST order.json</h2>
+<h3>Request</h3>
+GET<br>
+http://<%= request.host %>/order.json
+
+<h3>Payload</h3>
+{<br>
+    "recipes": [<br>
+        {"recipe_id": 1, "quantity": 250},<br>
+        {"recipe_id": 2, "quantity": 210}<br>
+        ]<br>
+}<br>
+
+<h3>Example response</h3>
+
+[
+  {
+    "name": "flour",
+    "quantity": 25,
+    "unit": "g",
+    "unit_size": 1000
+  },
+  {
+    "name": "sugar",
+    "quantity": 13,
+    "unit": "g",
+    "unit_size": 1000
+  }, ...
+
+]
