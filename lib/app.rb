@@ -120,6 +120,21 @@ class App < Sinatra::Base
     goods.to_json
   end
 
+  post '/goods.json' do
+    content_type = :json
+
+    data = JSON.parse(request.body.read)
+    good = Good.new(data['good'])
+
+    if good.save
+      good.to_json
+    else
+          halt 500
+    end
+  end
+
+
+
   get '/ingredients.json' do
 
     ingredients = []

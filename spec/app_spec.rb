@@ -114,4 +114,24 @@ describe 'The calculate food order site ' do
     expect(last_response).to be_ok
   end
 
+  it "should add a good" do
+    data =  {
+      :good => {
+        :name => "soup",
+        :unit => "litre",
+        :unit_size => 1000,
+        :price_per_unit => 500
+        }
+      }
+    post 'goods.json', data.to_json
+
+    expect(last_response).to be_ok
+
+    good = JSON.parse(last_response.body)
+    expect(good['name']).to eq "soup"
+    expect(good['unit']).to eq "litre"
+
+  end
+
+
 end
