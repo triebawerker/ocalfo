@@ -153,4 +153,19 @@ class App < Sinatra::Base
     ingredients.to_json
   end
 
+  put '/goods.json/:id' do
+    content_type :json
+
+    data = JSON.parse(request.body.read)
+    good = Good.get(data['id'])
+
+    if good.update(data['good'])
+      good.to_json
+    else
+      halt 500
+    end
+
+  end
+
+
 end

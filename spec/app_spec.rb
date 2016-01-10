@@ -133,5 +133,18 @@ describe 'The calculate food order site ' do
 
   end
 
+  it "should update a good" do
+
+    flour = Good.first(:name => "flour")
+
+    flour.name = "spelt"
+
+    data = { :id => flour.id, :good => flour }
+
+    put 'goods.json/:id', data.to_json
+
+    good = JSON.parse(last_response.body)
+    expect(good['name']).to eq "spelt"
+  end
 
 end
