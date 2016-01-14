@@ -138,10 +138,10 @@ describe 'The calculate food order site ' do
     flour = Good.first(:name => "flour")
 
     flour.name = "spelt"
+    id = flour.id
 
-    data = { :id => flour.id, :good => flour }
-
-    put 'goods.json/:id', data.to_json
+    put "goods.json/#{id}", {:good => flour}.to_json
+    expect(last_response).to be_ok
 
     good = JSON.parse(last_response.body)
     expect(good['name']).to eq "spelt"

@@ -109,7 +109,9 @@ class App < Sinatra::Base
   get '/goods.json' do
     goods = []
     Good.all.each do |good|
-      goods << { :name => good.name,
+      goods << {
+        :id => good.id,
+        :name => good.name,
         :unit => good.unit,
         :unit_size => good.unit_size,
         :price_per_unit => good.price_per_unit
@@ -133,8 +135,6 @@ class App < Sinatra::Base
     end
   end
 
-
-
   get '/ingredients.json' do
 
     ingredients = []
@@ -157,7 +157,7 @@ class App < Sinatra::Base
     content_type :json
 
     data = JSON.parse(request.body.read)
-    good = Good.get(data['id'])
+    good = Good.get(params['id'])
 
     if good.update(data['good'])
       good.to_json
