@@ -37,3 +37,20 @@ http://<%= request.host %>/order.json
   }, ...
 
 ]
+
+<h2>PUT order.json/:id</h2>
+change good: flour (good.id = 1) into spelt<br>
+<h3>Request</h3>
+PUT<br>
+http://<%= request.host %>/good.json/:id<br>
+e.g. id = 1
+<h3>Paylaod</h3>
+
+{
+    "good": {
+    "name": "spelt",
+    "unit": "g",
+    "unit_size": 1000,
+    "price_per_unit": 199
+  }
+}
